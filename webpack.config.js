@@ -1,8 +1,12 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { commonConfig, buildValidations, tasks } = require("./build-utils");
+const webpackMerge = require("webpack-merge");
 
-const port = process.env.PORT || 8000;
-module.exports = {
-  mode: "development",
+module.exports = (env) => {
+  if (!env) {
+    throw new Error(buildValidations.ERR_NO_ENV_FLAG);
+  }
+  const envConfig = require(`./build-utils/webpack.${env.env}.js`);
+  const mergedConfig = webpackMerge(commonConfig, envConfig);
+  tasks.copyAssets();
+  return mergedConfig;
 };
