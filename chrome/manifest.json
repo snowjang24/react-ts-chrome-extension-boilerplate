@@ -1,8 +1,9 @@
 {
   "version": "0.0.0",
   "manifest_version": 2,
-  "name": "Project name",
-  "description": "Project description",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
   "icons": {
     "16": "img/icon-16.png",
     "48": "img/icon-48.png",
