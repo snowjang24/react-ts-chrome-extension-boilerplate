@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+
 const commonPaths = require("./common-paths");
 
 const HWPConfig = (viewNames) => {
@@ -9,6 +11,7 @@ const HWPConfig = (viewNames) => {
       new HtmlWebpackPlugin({
         title: `My Extension Project (${viewName})`,
         filename: `${viewName}.html`,
+        inject: "body",
         template: path.join(commonPaths.chromePath, `views/${viewName}.html`),
         chunks: [viewName],
       })
@@ -23,7 +26,6 @@ module.exports = {
     content: [path.join(commonPaths.extensionPath, "content")],
   },
   output: {
-    publicPath: "/",
     path: path.join(__dirname, "../dist"),
     filename: "js/[name].bundle.js",
     chunkFilename: "js/[id].chunk.js",
@@ -48,5 +50,19 @@ module.exports = {
       },
     ],
   },
-  plugins: [...HWPConfig(["content", "popup", "window"])],
+  plugins: [
+    ...HWPConfig(["content", "popup", "window"]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(commonPaths.chromePath, "assets"),
+          to: path.join(__dirname, "../dist"),
+        },
+        {
+          from: path.join(commonPaths.chromePath, "manifest.json"),
+          to: path.join(__dirname, "../dist", "manifest.json"),
+        },
+      ],
+    }),
+  ],
 };

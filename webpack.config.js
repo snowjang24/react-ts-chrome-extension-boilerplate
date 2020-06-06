@@ -1,4 +1,4 @@
-const { commonConfig, buildValidations, tasks } = require("./build-utils");
+const { commonConfig, buildValidations } = require("./build-utils");
 const webpackMerge = require("webpack-merge");
 
 module.exports = (env) => {
@@ -7,6 +7,5 @@ module.exports = (env) => {
   }
   const envConfig = require(`./build-utils/webpack.${env.env}.js`);
   const mergedConfig = webpackMerge(commonConfig, envConfig);
-  tasks.copyAssets();
   return mergedConfig;
 };
