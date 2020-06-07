@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   stories: ["../stories/**/*.stories.tsx", "../src/**/*.stories.tsx"],
   addons: [
@@ -8,7 +10,15 @@ module.exports = {
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
-      loader: require.resolve("babel-loader"),
+      use: [
+        require.resolve("babel-loader"),
+        {
+          loader: require.resolve("react-docgen-typescript-loader"),
+          options: {
+            tsconfigPath: path.resolve(__dirname, "../tsconfig.json"),
+          },
+        },
+      ],
     });
     config.resolve.extensions.push(".ts", ".tsx");
     return config;
