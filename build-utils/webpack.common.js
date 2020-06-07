@@ -32,6 +32,11 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", "jsx"],
+    alias: {
+      "@src": path.resolve(__dirname, "../src"),
+      "@build-utils": path.resolve(__dirname, "../build-utils/"),
+      "@chrome": path.resolve(__dirname, "../chrome"),
+    },
   },
   module: {
     rules: [
