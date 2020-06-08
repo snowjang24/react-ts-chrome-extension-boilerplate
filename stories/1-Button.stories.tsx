@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { Button } from "@storybook/react/demo";
+import Button from "../src/components/Button/Button";
 
 export default {
   title: "Button",
@@ -14,7 +14,7 @@ export const Text = () => (
 export const Emoji = () => (
   <Button onClick={action("clicked")}>
     <span role="img" aria-label="so cool">
-      😀 😎 👍 💯 This is Button
+      😀 😎 👍 💯
     </span>
   </Button>
 );
