@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDirs": ["src", "stories", "chrome/extension"],
+    "paths": {
+      "@src/*": ["./src/*"]
+    },
     "outDir": "dist/js",
     "module": "commonjs",
     "target": "es5",
@@ -8,8 +13,6 @@
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDirs": ["src", "stories"],
-    "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
